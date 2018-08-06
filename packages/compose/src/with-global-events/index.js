@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { forEach } from 'lodash';
+import { forEach, omit } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -61,7 +61,12 @@ function withGlobalEvents( eventTypesToHandlers ) {
 			}
 
 			render() {
-				return <WrappedComponent { ...this.props } ref={ this.handleRef } />;
+				return (
+					<WrappedComponent
+						{ ...omit( this.props, [ 'forwardedRef' ] ) }
+						ref={ this.handleRef }
+					/>
+				);
 			}
 		}
 
